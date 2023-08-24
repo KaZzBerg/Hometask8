@@ -1,42 +1,35 @@
-def task1(number: int, degree: int) -> float:
-    if degree < 0:
-        result = number * number
-        return 1 / result
-    if degree == 0:
-        return 1
-    if degree == 1:
-        return number
-    if degree >= 1:
-        return number * task1(number, degree - 1)
+import re
 
+home_phone = [input('Enter your home number: ')]
 
-print(task1(number=5, degree=2))
+home_phone_regex = re.compile(r'^[+]*[38]*0+[0-9]{4}[0-9]{5}$')
 
-n = int(input('Enter value: '))
+for phone in home_phone:
+    if home_phone_regex.match(phone) and 9 >= len(home_phone) <= 13:
+        print(f'Your home number: {home_phone}')
+    else:
+        print('Incorrect number!')
 
+user_phone = [input('Enter your phone number: ')]
 
-def stars(n):
-    if n <= 0:
-        return
+phone_regex = re.compile(r'^[+]*[38]*0+[0-9]{2}[0-9]{7}$')
 
-    print('*', end='')
+for phone1 in user_phone:
+    if phone_regex.match(phone1) and 9 >= len(user_phone) <= 13:
+        print(f'Your phone number: {user_phone}')
+    else:
+        print('Incorrect number!')
 
-    return stars(n - 1)
+user_email = input('Enter your email: ')
 
+if re.match(r'\w+@\w+.(\w+)', user_email) and len(user_email) <= 40:
+    print(f'Your email: {user_email}')
+else:
+    print('Incorrect email!')
 
-print(stars(n))
-
-# print(task2(stars=user))
-
-num1 = int(input('Enter first value: '))
-num2 = int(input('Enter last value: '))
-
-
-def sum_range(a, b):
-    if a > b:
-        return 0
-
-    return a + sum_range(a + 1, b)
-
-
-print(sum_range(a=num1, b=num2))
+user_name = str(input('Enter your full name: ').title())
+length = re.findall(r'\w+', user_name)
+if re.match(r'\w+\D', user_name) and len(length) == 3 and 2 <= len(user_name) <= 20:
+    print(f'Your full name: {user_name}')
+else:
+    print('Incorrect full name')
